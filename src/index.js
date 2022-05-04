@@ -13,7 +13,7 @@ root.render(
     props1={1} 
     props2="Привет" 
     props3={ false } 
-    props4={() => console.log("props")}
+    props4={() => (console.log("click")) }
     props5={[1,2,3]}
     props6={[{title: "Car", year: 2020}, {title: "Auto", year: 2001}]}
     testMessage={
