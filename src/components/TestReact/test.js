@@ -6,7 +6,6 @@ import styles from "./test.module.css";
 export class TestClass extends React.Component {
     render() {
         const { props1, props2, props3, props4, props5, props6, testMessage } = this.props;
-        let i = 1;
 
         return (
             <div className={styles.wrapper}>
