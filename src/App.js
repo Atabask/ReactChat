@@ -21,16 +21,16 @@ export const App = () => {
     }
     
     useEffect(() => {
-        
         let author = inputAuthorRef.current.value
         let text = textAreaRef.current.value
         let newMessage = {author, text}
-        if( author !== "BOT" ){
-            let messageLists = [...messageList, {author: "BOT", text: "Fill in the fields"}]
-            setMessageList(messageLists)
-        }console.log(newMessage)
-        return
-       
+        let botMessage = {author: "BOT", text: "Fill in the fields"}
+        if( newMessage.author !== "BOT" ){
+
+            setMessageList([...messageList, botMessage])
+            console.log(newMessage)
+            
+        } 
     },[]);
 
     return (
@@ -50,5 +50,13 @@ export const App = () => {
     )
 }
 
-
-
+// let lastMessage = messageList[messageList.length-1]
+//         if(lastMessage) {
+//             if(lastMessage.author !== "BOT"){
+//                 setTimeout(() =>  messageLists = [...messageList, {author: "BOT", text: "Hi"}], 1500 )
+//             }console.log(messageLists)
+//             return
+//         }
+//         return;
+        
+       

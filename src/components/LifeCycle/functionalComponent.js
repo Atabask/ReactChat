@@ -27,3 +27,9 @@ export const FunctionalComponent = () => {
     )
     
 }
+
+
+// let botMessage = {author: "BOT", text: "Fill in the fields"}
+//         if( newMessage.author !== "BOT" ){
+
+//             setMessageList([...messageList, botMessage])
