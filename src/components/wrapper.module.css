@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper_chat_room {
+    display: flex;
+    gap: 200px;
+}

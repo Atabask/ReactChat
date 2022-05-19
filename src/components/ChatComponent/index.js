@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import  "./main.css"
+import  "./styleChatComponent.module.css"
 
 
-export const App = () => {
+export const ChatComponent = () => {
     const [messageList, setMessageList] = useState([])
     
     const textAreaRef = React.createRef();
@@ -35,7 +35,6 @@ export const App = () => {
 
     return (
         <div className="wrapperChat">
-            <h1 className="header">Chat</h1>
             <div className="textField">
                 {messageList.map((message, index) => 
                     <p key={index.toString()}>{message.author}: {message.text}</p>
@@ -49,14 +48,3 @@ export const App = () => {
         </div>
     )
 }
-
-// let lastMessage = messageList[messageList.length-1]
-//         if(lastMessage) {
-//             if(lastMessage.author !== "BOT"){
-//                 setTimeout(() =>  messageLists = [...messageList, {author: "BOT", text: "Hi"}], 1500 )
-//             }console.log(messageLists)
-//             return
-//         }
-//         return;
-        
-       

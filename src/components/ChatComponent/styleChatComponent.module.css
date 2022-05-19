@@ -1,0 +1,30 @@
+.wrapperChat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textField {
+    width: 600px;
+    height: 500px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.formAddMessage {
+    display: flex;
+}
+
+.textAreaField {
+    width: 505px;
+    height: 55px;
+    border-radius: 5px;
+}
+
+.btnAddMessage {
+    height: 55px;
+    padding: 5px;
+}
