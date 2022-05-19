@@ -1,50 +1,76 @@
-import React, { useEffect, useState } from "react";
-import  "./styleChatComponent.module.css"
+import React, { useEffect, useState, useRef } from "react";
+import  styles from "./styleChatComponent.module.css";
+import { Input, InputAdornment } from "@mui/material";
+import { Send } from "@mui/icons-material"
 
 
-export const ChatComponent = () => {
-    const [messageList, setMessageList] = useState([])
+
+
+
+
+
+
+export const ChatComponent = (props) => {
+    const [value, setValue] = useState("");
+    const [messageList, setMessageList] = useState([{id: props.id, author: "BOT", text: "Fill in the fields"}]);
     
-    const textAreaRef = React.createRef();
-    const inputAuthorRef = React.createRef();
-    
+    const BOT_MESSAGE = {id: props.id, author: "BOT", text: "Fill in the fields"};
+    const refTextAreaField = useRef()
 
-    const addMessage = (e) => {
-        let author = inputAuthorRef.current.value
-        let text = textAreaRef.current.value
-        let newMessage = {author, text}
-        let messageLists = [...messageList, newMessage]
-        setMessageList(messageLists)
-        inputAuthorRef.current.value = ""
-        textAreaRef.current.value = ""
-        e.preventDefault()
+    useEffect(() => {
+        refTextAreaField.current?.focus()
+    },[])
+
+    const addMessage = () => {
+        if(value){
+            setMessageList([...messageList, { author: "Nickname", text: value } ])    
+            setValue("") 
+        }
     }
     
     useEffect(() => {
-        let author = inputAuthorRef.current.value
-        let text = textAreaRef.current.value
-        let newMessage = {author, text}
-        let botMessage = {author: "BOT", text: "Fill in the fields"}
-        if( newMessage.author !== "BOT" ){
+        const lastMessage = messageList[messageList.length - 1]
+        let timerId = null
 
-            setMessageList([...messageList, botMessage])
-            console.log(newMessage)
-            
-        } 
-    },[]);
+        if(messageList.length && lastMessage?.author === "Nickname" ){
+            timerId = setTimeout(() => {
+                setMessageList([...messageList, BOT_MESSAGE])
+            },1500);
+        }
+
+        return () => {
+            clearInterval(timerId)
+        }
+    },[messageList])
+
+    const handlePressInput = ({code}) => {
+        if(code === "Enter"){
+            addMessage()
+        }
+    }
 
     return (
-        <div className="wrapperChat">
-            <div className="textField">
-                {messageList.map((message, index) => 
-                    <p key={index.toString()}>{message.author}: {message.text}</p>
+        <div className={styles.wrapperChat}>
+            <div className={styles.textField}>
+                {messageList.map((message) => 
+                    <p key={props.id}>{message.author}: {message.text}</p>
                 )}
             </div>
-            <form className="formAddMessage">
-                <input placeholder="What's your name?" ref={inputAuthorRef} type="text" />
-                <textarea className="textAreaField" type="text" ref={textAreaRef} placeholder="Write a message" ></textarea>
-                <button className="btnAddMessage" type="submit" onClick={addMessage} >Add Message</button>
-            </form> 
+            <div className={styles.formAddMessage}>
+                <Input className={styles.textAreaField} 
+                inputRef = {refTextAreaField}
+                type="text" 
+                onKeyDown={handlePressInput}
+                placeholder="Write a message"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                endAdornment = {
+                    <InputAdornment position="end">
+                        {value && <Send  onClick={addMessage}/>}
+                    </InputAdornment>
+                 }></Input>
+                
+            </div> 
         </div>
     )
 }

@@ -1,12 +1,21 @@
+@font-face {
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/Cairo/Cairo-VariableFont_wght.ttf");
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;    
+    font-family: "Cairo", "Arial", sans-serif;
+    background-color: #5120B3;
+    color: white;
 }
 
-.header {
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-}
+
+
+
+
 
