@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import  styles from "./styleChatComponent.module.css";
 import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material"
+import { style } from "@mui/system";
 
 
 
@@ -53,19 +54,25 @@ export const ChatComponent = (props) => {
         <div className={styles.wrapperChat}>
             <div className={styles.textField}>
                 {messageList.map((message) => 
-                    <p key={props.id}>{message.author}: {message.text}</p>
+                    <p key={props.id}>
+                        <span className={styles.message_author}>
+                        {message.author}</span>: 
+                        <span className={styles.message_text}>
+                        {message.text}</span>
+                    </p>
                 )}
             </div>
             <div className={styles.formAddMessage}>
                 <Input className={styles.textAreaField} 
                 inputRef = {refTextAreaField}
+                fullWidth = {true}
                 type="text" 
                 onKeyDown={handlePressInput}
                 placeholder="Write a message"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 endAdornment = {
-                    <InputAdornment position="end">
+                    <InputAdornment  position="end">
                         {value && <Send  onClick={addMessage}/>}
                     </InputAdornment>
                  }></Input>
