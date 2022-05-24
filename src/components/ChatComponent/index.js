@@ -2,29 +2,27 @@ import React, { useEffect, useState, useRef } from "react";
 import  styles from "./styleChatComponent.module.css";
 import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material"
-import { style } from "@mui/system";
-
-
-
-
 
 
 
 
 export const ChatComponent = (props) => {
     const [value, setValue] = useState("");
-    const [messageList, setMessageList] = useState([{id: props.id, author: "BOT", text: "Fill in the fields"}]);
+    const [messageList, setMessageList] = useState([{id: props.id, author: "BOT", text: "Fill in the fields", date: new Date()}]);
     
-    const BOT_MESSAGE = {id: props.id, author: "BOT", text: "Fill in the fields"};
-    const refTextAreaField = useRef()
+    const getBotMessage = () => ({id: props.id, author: "BOT", text: "Fill in the fields", date: new Date()});
+    
+    const scrollRef = useRef()
 
     useEffect(() => {
-        refTextAreaField.current?.focus()
-    },[])
+        if(scrollRef.current) {
+            scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight)
+        }
+    },[messageList])
 
     const addMessage = () => {
         if(value){
-            setMessageList([...messageList, { author: "Nickname", text: value } ])    
+            setMessageList([...messageList, { author: "Nickname", text: value, date: new Date() } ])    
             setValue("") 
         }
     }
@@ -32,10 +30,10 @@ export const ChatComponent = (props) => {
     useEffect(() => {
         const lastMessage = messageList[messageList.length - 1]
         let timerId = null
-
+    
         if(messageList.length && lastMessage?.author === "Nickname" ){
             timerId = setTimeout(() => {
-                setMessageList([...messageList, BOT_MESSAGE])
+                setMessageList([...messageList, getBotMessage()])
             },1500);
         }
 
@@ -52,19 +50,16 @@ export const ChatComponent = (props) => {
 
     return (
         <div className={styles.wrapperChat}>
-            <div className={styles.textField}>
+            <div ref={scrollRef} className={styles.textField}>
                 {messageList.map((message) => 
-                    <p key={props.id}>
-                        <span className={styles.message_author}>
-                        {message.author}</span>: 
-                        <span className={styles.message_text}>
-                        {message.text}</span>
-                    </p>
+                    <div className={styles.messageFull} key={props.id}>
+                        <h2 className={styles.message_author}>{message.author}</h2>: 
+                        <p className={styles.message_text}>{message.text}</p>
+                    </div>
                 )}
             </div>
             <div className={styles.formAddMessage}>
                 <Input className={styles.textAreaField} 
-                inputRef = {refTextAreaField}
                 fullWidth = {true}
                 type="text" 
                 onKeyDown={handlePressInput}

@@ -1,5 +1,4 @@
 import React from "react";
-import { HeaderComponent } from "./HeaderChat/index"
 import { ChatComponent } from "./ChatComponent/index"
 import { ChatRooms } from "./ChatList/Index"
 import  styles from "./wrapper.module.css"
@@ -13,13 +12,10 @@ export const App = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div>
-                <HeaderComponent />
                 <div className={styles.wrapper_chat_and_room}>
-                    <ChatRooms id={newId}/>
+                    <ChatRooms  id={newId}/>
                     <ChatComponent id={newId}/>
                 </div>
-            </div>
         </div>
     )
 }

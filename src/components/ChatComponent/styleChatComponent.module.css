@@ -1,5 +1,5 @@
 .textField {
-    width: 600px;
+    width: 1400px;
     height: 500px;
     margin-top: 20px;
     padding: 10px;
@@ -7,20 +7,18 @@
     border-radius: 5px;
     margin-bottom: 10px;
     line-height: 60px;
-}
+    display: inline-table;
 
-.textAreaField {
-    width: 505px;
-    height: 55px;
-    border-radius: 5px;
-    color: #ffff;
 }
-
-input.reg::placeholder{ color: #ffff;}
 
 .btnAddMessage {
     height: 55px;
     padding: 5px;
+}
+
+.messageFull {
+    display: flex;
+    align-items: center;
 }
 
 .message_text {

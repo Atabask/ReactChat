@@ -1,0 +1,26 @@
+.wrapper_home {
+    padding: 50px 100px;
+}
+
+.header_home {
+    text-align: center;
+}
+
+.container_img_text {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.img_home_page{
+    width: 700px;
+
+}
+
+.home_text {
+    width: 500px;
+    display: flex;
+    font-size: 24px;
+
+}

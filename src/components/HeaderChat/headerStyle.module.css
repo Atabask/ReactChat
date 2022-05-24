@@ -1,5 +1,21 @@
-.header {
+.wrapper{
     background-color: #7F53D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.header {
     border-radius: 5px;
-    padding: 20px;
+}
+
+.nav_header {
+    display: flex;
+    gap: 50px;
+    list-style-type: none;
+}
+
+.nav_item_title {
+    text-decoration: none;
 }
