@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    margin: 125px;
+}
+
+.container_info_profile {
+    margin-left: 50px;
+    width: 700px;
+}
