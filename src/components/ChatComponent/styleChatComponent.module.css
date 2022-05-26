@@ -7,7 +7,7 @@
     border-radius: 5px;
     margin-bottom: 10px;
     line-height: 60px;
-    display: inline-table;
+    
 
 }
 
@@ -30,4 +30,10 @@
 
 .message_author {
 font-weight: 600;
+}
+
+.wrapperChatInput {
+    position: absolute;
+    right: -1400px;
+    top: 0;
 }

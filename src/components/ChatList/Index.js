@@ -1,26 +1,28 @@
 import React, { useState } from "react";
-import {  List, ListItem, ListItemText } from "@mui/material"
 import styles from "./chatListStyle.module.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
+import { ChatComponent } from "../ChatComponent/index"
 
 
 
-export const ChatRooms = (props) => {
-    const [ chatRooms, setChatRooms] = useState(["Auto", "Game", "Friends"]);
-    const { roomId } = useParams();
+export const ChatRooms = () => {
+  const [chatRooms, setChatRooms] = useState(["Auto", "Game", "Friends"]);
 
 
-    return (
-        <div className={styles.wrapper_Chat_List}>
-            <h1>Chat rooms</h1>
-          <List >
-              {chatRooms.map((room) => 
-              <Link key = {room} to={`/chat/${room}`}>
-                  <ListItemText primary={room.nameRoom} />
-              </Link>
-            )
-            }
-          </List>
-        </div>
-    )
+  return (
+    <div className={styles.wrapper_Chat_List}>
+      <h1>Chat rooms</h1>
+      <nav>
+        {chatRooms.map((room) => (
+          <div key={room}>
+            <Link to={room}>{room}</Link><br/>
+          </div>
+        ))}
+      </nav>
+
+      <Routes>
+        <Route path=":roomId" element={<ChatComponent className={styles.chatRoom} />}></Route>
+      </Routes>
+    </div>
+  )
 }
