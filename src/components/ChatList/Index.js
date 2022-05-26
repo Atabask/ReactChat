@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {  List, ListItem, ListItemText } from "@mui/material"
-
 import styles from "./chatListStyle.module.css";
+import { Link, useParams } from "react-router-dom";
 
 
 
 export const ChatRooms = (props) => {
-    const [ chatRooms, setChatRooms] = useState([{id: props.id, nameRoom: "Auto"},{id:"2", nameRoom: "Game"},{id:"3", nameRoom: "Friends"}])
+    const [ chatRooms, setChatRooms] = useState(["Auto", "Game", "Friends"]);
+    const { roomId } = useParams();
 
 
     return (
@@ -14,9 +15,9 @@ export const ChatRooms = (props) => {
             <h1>Chat rooms</h1>
           <List >
               {chatRooms.map((room) => 
-              <ListItem  key = {props.id} >
+              <Link key = {room} to={`/chat/${room}`}>
                   <ListItemText primary={room.nameRoom} />
-              </ListItem>
+              </Link>
             )
             }
           </List>
