@@ -2,15 +2,25 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "./styleChatComponent.module.css";
 import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material"
+import { nanoid } from "nanoid";
+
+const newId = nanoid();
+const getBotMessage = () => ({ 
+    id: newId, 
+    author: "BOT", 
+    text: "Fill in the fields", 
+    date: new Date() 
+});
 
 
-
-
-export const ChatComponent = (props) => {
+export const ChatComponent = () => {
     const [value, setValue] = useState("");
-    const [messageList, setMessageList] = useState([{ id: props.id, author: "BOT", text: "Fill in the fields", date: new Date() }]);
+    const [messageList, setMessageList] = useState({
+        Auto: [ getBotMessage() ],
+        Game: [ getBotMessage() ],
+    });
 
-    const getBotMessage = () => ({ id: props.id, author: "BOT", text: "Fill in the fields", date: new Date() });
+    
 
     const scrollRef = useRef()
 
@@ -53,7 +63,7 @@ export const ChatComponent = (props) => {
             <div className={styles.wrapperChatInput}>
                 <div ref={scrollRef} className={styles.textField}>
                     {messageList.map((message) =>
-                        <div className={styles.messageFull} key={props.id}>
+                        <div className={styles.messageFull} key={newId}>
                             <h2 className={styles.message_author}>{message.author}</h2>:
                             <p className={styles.message_text}>{message.text}</p>
                         </div>
