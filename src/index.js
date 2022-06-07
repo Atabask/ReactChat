@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ProfilePage, ChatPage, HomePage, Page404} from './pages';
+import { Provider } from 'react-redux';
+import { ProfilePage, ChatPage, HomePage, Page404 } from './pages';
 import { HeaderComponent } from './components/HeaderChat';
+import { store } from './store';
 
 import "./main.css"
 
@@ -20,17 +22,19 @@ const mainTheme = createTheme({
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={mainTheme} >
-      <BrowserRouter>
-        <HeaderComponent />
-        <Routes>
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/chat/*" element={<ChatPage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={mainTheme} >
+        <BrowserRouter>
+          <HeaderComponent />
+          <Routes>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/chat/*" element={<ChatPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 
