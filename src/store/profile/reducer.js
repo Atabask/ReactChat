@@ -11,9 +11,13 @@ const initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case TOGGLE_VISIBLE_PROFILE:
-            return { ...state, isVisibleProfile: !state.isVisibleProfile };
+            return { 
+                ...state, 
+                isVisibleProfile: !state.isVisibleProfile };
         case EDIT_PROFILE_NAME:
-            return { ...state, firstName: action.newName }
+            return { 
+                ...state,
+                firstName: action.payload }
         default:
             return state;
     }
