@@ -24,16 +24,16 @@ export const ModalEdit = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [value, setValue] = React.useState("")
+    const [newName, setNewName] = React.useState("")
     const profile = useSelector((state) => state.profile);
     const dispatchEditName = useDispatch();
-    console.log(value)
+    console.log(newName)
     console.log(profile)
 
    
     const handlePressInput = ({ code }) => {
         if (code === "Enter") {
-            editProfileName(value);
+            editProfileName(newName);
         }
     };
   
@@ -48,11 +48,11 @@ export const ModalEdit = () => {
               type='text'
               fullWidth={true}
               onKeyDown={handlePressInput}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
               endAdornment={
                   <InputAdornment position='end'>
-                      {value && <Send onClick={() => dispatchEditName(editProfileName(value))}></Send>}
+                      {newName && <Send onClick={() => dispatchEditName(editProfileName(newName))}></Send>}
                   </InputAdornment>
               }>
               </Input>
