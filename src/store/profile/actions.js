@@ -5,10 +5,10 @@ export const toggleVisibleProfile = () => {
     return { type: TOGGLE_VISIBLE_PROFILE };
 }
 
-export const editProfileName = (newName) => {
+export const editProfileName = (value) => {
     return { 
         type: EDIT_PROFILE_NAME,
-        payload: newName
+        payload: value
         
     };
 }
