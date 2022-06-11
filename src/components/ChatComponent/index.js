@@ -1,29 +1,25 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import styles from "./styleChatComponent.module.css";
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Input, InputAdornment } from "@mui/material";
-import { Send } from "@mui/icons-material"
-import { nanoid } from "nanoid";
+import { Send } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { sendMessage, deleteMessage } from "../../store/messages";
+import { Button } from "@mui/material";
 
-const newId = nanoid();
-const getBotMessage = () => ({ 
-    id: newId, 
-    author: "BOT", 
-    message: "Fill in the fields", 
-});
+
 
 
 export const ChatComponent = () => {
-    const { roomId } = useParams();
-    const [value, setValue] = useState("");
-    const [messageList, setMessageList] = useState({
-        Auto: [ getBotMessage() ],
-        Game: [ getBotMessage() ],
-    });
 
-    
-    const messages = messageList[roomId] ?? []
-    
+    const { roomId } = useParams();
+
+    const [value, setValue] = useState("");
+
+    const messages = useSelector((state) => state.messages.messages[roomId] ?? [])
+
+    const dispatch = useDispatch()
 
     const scrollRef = useRef()
 
@@ -31,37 +27,30 @@ export const ChatComponent = () => {
         if (scrollRef.current) {
             scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight)
         }
-    }, [messageList])
+    }, [messages])
 
     const addMessage = useCallback(
         (message, author = "Nickname") => {
-        // ...messageList, { author: "Nickname", text: value, date: new Date() }
-        if (message) {
-            setMessageList((state) => ({
-                 ...state, 
-                 [roomId]: [
-                     ...(state[roomId] ?? []),
-                     { author, message }
-                 ] }))
-            setValue("")
-        }
-    },[roomId])
+            if (message) {
+                dispatch(sendMessage(roomId, { message, author }))
+                setValue("")
+            }
+        }, [roomId])
 
-    useEffect(() => {
-        const messages = messageList[roomId] ?? []
-        const lastMessage = messages[messages.length - 1]
-        let timerId = null
+    // useEffect(() => {
+    //     const lastMessage = messages[messages.length - 1]
+    //     let timerId = null
 
-        if (messages.length && lastMessage?.author === "Nickname") {
-            timerId = setTimeout(() => {
-                addMessage("Hello", "BOT")
-            }, 1500);
-        }
+    //     if (messages.length && lastMessage?.author === "Nickname") {
+    //         timerId = setTimeout(() => {
+    //             addMessage("Hello", "BOT")
+    //         }, 1500);
+    //     }
 
-        return () => {
-            clearInterval(timerId)
-        }
-    }, [addMessage, messageList, roomId])
+    //     return () => {
+    //         clearInterval(timerId)
+    //     }
+    // }, [addMessage, messages, roomId])
 
     const handlePressInput = ({ code }) => {
         if (code === "Enter") {
@@ -74,10 +63,10 @@ export const ChatComponent = () => {
             <div className={styles.wrapperChatInput}>
                 <div ref={scrollRef} className={styles.textField}>
                     {messages.map((message) =>
-                        <div className={styles.messageFull} key={newId}>
+                        <div className={styles.messageFull} key={message.id}>
                             <h2 className={styles.message_author}>{message.author}</h2>:
                             <p className={styles.message_text}>{message.message}</p>
-                            
+                            <Button onClick={() => dispatch(deleteMessage(roomId, message.id))}><DeleteIcon /></Button>
                         </div>
                     )}
                 </div>
