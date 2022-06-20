@@ -5,11 +5,12 @@ import  PersonIcon  from '@mui/icons-material/Person';
 
 const menu = [
     {title: "Home", to: "/"},
+    {title: "Gists", to: "/gists"},
     {title: "Chat", to: "/chat"},
-    {title: <PersonIcon/>, to: "/profile"}
+    {title: <PersonIcon/>, to: "/profile"},
 ]
 
-export const HeaderComponent = (props) => {
+export const HeaderComponent = () => {
 
 
     return (

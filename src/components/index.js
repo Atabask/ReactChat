@@ -1,5 +1,4 @@
 import React from "react";
-// import { ChatComponent } from "./ChatComponent/index"
 import { ChatRooms } from "./ChatList/Index"
 import  styles from "./wrapper.module.css"
 

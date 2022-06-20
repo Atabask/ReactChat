@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ProfilePage, ChatPage, HomePage, Page404 } from './pages';
+import { ProfilePage, ChatPage, HomePage, Page404, GistsPage } from './pages';
 import { HeaderComponent } from './components/HeaderChat';
 import { store, persistor } from './store';
 
@@ -33,6 +33,7 @@ root.render(
               <Route path="/chat/*" element={<ChatPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path="*" element={<Page404 />} />
+              <Route path="/gists" element={<GistsPage />}/>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
