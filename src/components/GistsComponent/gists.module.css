@@ -8,3 +8,21 @@
     text-align: center;
 }
 
+.header_gist {
+    text-align: center;
+    font-size: 50px;
+}
+
+.wrapper_gists_flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.wrapper_public_gists {
+    width: -webkit-fill-available;
+}
+
+.header_public_gists{
+    font-size: 50px;
+}
+

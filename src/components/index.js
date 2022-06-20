@@ -11,7 +11,6 @@ export const App = () => {
         <div className={styles.wrapper}>
                 <div className={styles.wrapper_chat_and_room}>
                     <ChatRooms />
-                    {/* <ChatComponent id={newId}/> */}
                 </div>
         </div>
     )

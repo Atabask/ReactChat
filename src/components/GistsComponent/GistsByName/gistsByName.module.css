@@ -1,0 +1,26 @@
+.wrapper_gists_by_name {
+    width: -webkit-fill-available;
+}
+
+.msg_error {
+    width: 600px;
+    margin-top: 50px;
+    font-size: 100px;
+    text-align: center;
+}
+
+.wrapper_error {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header_gists_loading {
+    margin-top: 50px;
+    font-size: 100px;
+    text-align: center;
+}
+
+.header_search_gist {
+    font-size: 50px;
+}
