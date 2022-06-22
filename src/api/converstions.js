@@ -3,11 +3,9 @@ import { database } from "./firebase"
 
 
 export const createConversationsApi = (title) => {
-    set(child(ref(database), `conversations/${title}`), title)
+    return set(child(ref(database), `conversations/${title}`), title)
 }
 
 export const getConversationsApi = () => {
- return get(child(ref(database), "conversations"));
-
-
+    return get(child(ref(database), "conversations"));
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./chatListStyle.module.css";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { ChatComponent } from "../ChatComponent/index"
@@ -7,7 +7,8 @@ import { deleteConversation } from "../../store/conversations/actions";
 import { ModalAddRoom } from "./modalAddRoom/index"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
-import { getConversations } from "../../store/conversations/index"
+import { getConversations } from "../../store/conversations/thunk";
+
 
 
 
@@ -39,7 +40,7 @@ export const ChatRooms = () => {
       <div className={styles.header_btn}>
         <h1>Chat rooms</h1><span><ModalAddRoom /></span></div>
       <nav>
-      {conversations.map((conversation) => (
+        {conversations.map((conversation) => (
           <div className={styles.wrapper_link_room} key={conversation}>
             <Link to={conversation}>{conversation}</Link>
             <Button onClick={() => deleteRoom(conversation)}>

@@ -1,11 +1,11 @@
-import { getStartConversation, getSuccessConversation, getErrorConversation } from "./actions"
+import { getStartConversations, getSuccessConversations, getErrorConversations } from "./actions"
 
 export const getConversations = () => async (dispatch, _, api) => {
     
     const conversations = [];
 
     try {
-        dispatch(getStartConversation())
+        dispatch(getStartConversations())
 
         const snapshot = await api.getConversationsApi()
 
@@ -13,8 +13,8 @@ export const getConversations = () => async (dispatch, _, api) => {
             conversations.push(snap.val())
         });
 
-        dispatch(getSuccessConversation(conversations))
+        dispatch(getSuccessConversations(conversations))
     } catch(e) {
-        dispatch(getErrorConversation(e))
+        dispatch(getErrorConversations(e))
     }
 }
