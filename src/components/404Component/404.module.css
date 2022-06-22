@@ -1,0 +1,12 @@
+.wrapper_404 {
+    display: flex;
+    justify-content: center;
+}
+
+.container_404 {
+    text-align: center;
+}
+
+.header_404 {
+    margin: 100px;
+}
