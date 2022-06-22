@@ -1,13 +1,21 @@
-import { CREATE_CONVERSATION, DELETE_CONVERSATION } from "./types"
+import { CREATE_CONVERSATION, DELETE_CONVERSATION, GET_CONVERSATIONS_ERROR, GET_CONVERSATIONS_START, GET_CONVERSATIONS_SUCCESS } from "./types"
 
 
 const initialState = {
-    conversations: ["Auto", "Game", "Friends"]
+    conversations: [],
+    pending: false,
+    error: null,
 }
 
 
 export const conversationsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GET_CONVERSATIONS_START:
+            return { ...state, pending: true, error: null };
+        case GET_CONVERSATIONS_SUCCESS:
+            return { ...state, pending: false, conversations: action.payload };
+        case GET_CONVERSATIONS_ERROR:
+            return { ...state, pending: false, error: action.payload };
         case CREATE_CONVERSATION:
             return {
                 ...state,
