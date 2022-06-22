@@ -1,0 +1,11 @@
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper_chat_and_room {
+    display: flex;
+    
+}
