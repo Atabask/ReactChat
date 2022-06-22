@@ -1,5 +1,4 @@
 export const logger = (store) => (next) => (action) => {
-    console.log("dispatch >>", action);
     console.log("prev state >>", store.getState());
 
     const result = next(action);

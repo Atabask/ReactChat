@@ -3,7 +3,7 @@ import { SEND_MESSAGE, sendMessage } from "../messages"
 
 export const botMessage = (store) => (next) => (action) => {
 
-    if (action.type === SEND_MESSAGE && action.payload.message.author === "Nickname") {               //Проверить Юзер или Никнейм
+    if (action.type === SEND_MESSAGE && action.payload.message.author === "Nickname") {  
         setTimeout(()=>{
             store.dispatch(
                 sendMessage(action.payload.roomId, {

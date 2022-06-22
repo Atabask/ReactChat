@@ -1,0 +1,28 @@
+.wrapper_gists  {
+    padding: 20px 50px;
+}
+
+.msg_error {
+    margin-top: 50px;
+    font-size: 100px;
+    text-align: center;
+}
+
+.header_gist {
+    text-align: center;
+    font-size: 50px;
+}
+
+.wrapper_gists_flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.wrapper_public_gists {
+    width: -webkit-fill-available;
+}
+
+.header_public_gists{
+    font-size: 50px;
+}
+
