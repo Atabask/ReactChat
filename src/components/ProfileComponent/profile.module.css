@@ -7,3 +7,14 @@
     margin-left: 50px;
     width: 700px;
 }
+
+.btn_profile_data {
+    padding: 5px 10px;
+    color: #000;
+    background-color: #7F53D9;
+    border: none;
+}
+
+.profile_item {
+    margin-right: 10px;
+}
