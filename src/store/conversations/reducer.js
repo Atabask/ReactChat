@@ -11,7 +11,7 @@ const initialState = {
 export const conversationsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_CONVERSATIONS_START:
-            return { ...state, pending: true,error: null };
+            return { ...state, pending: true, error: null };
         case GET_CONVERSATIONS_SUCCESS:
             return { ...state, pending: false, conversations: action.payload };
         case GET_CONVERSATIONS_ERROR:
