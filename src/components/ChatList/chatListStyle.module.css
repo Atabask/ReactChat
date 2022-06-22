@@ -1,8 +1,20 @@
 .wrapper_Chat_List {
-    width: 400px;
+    width: 600px;
     padding: 50px;
     border-radius: 5px;
     position: absolute;
+}
+
+.header_btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.wrapper_link_room {
+    width: 500px;
+    height: 100px;
 }
 
 

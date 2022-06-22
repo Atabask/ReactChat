@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import { Input, InputAdornment } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import { Send } from "@mui/icons-material"
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editProfileName } from "../../../store/profile"
 
 const style = {
@@ -25,11 +25,7 @@ export const ModalEdit = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [value, setValue] = React.useState("")
-    const profile = useSelector((state) => state.profile);
     const dispatchEditName = useDispatch();
-    console.log(value)
-    console.log(profile)
-
    
     const handlePressInput = ({ code }) => {
         if (code === "Enter") {
@@ -52,7 +48,7 @@ export const ModalEdit = () => {
               onChange={(e) => setValue(e.target.value)}
               endAdornment={
                   <InputAdornment position='end'>
-                      {value && <Send onClick={() => dispatchEditName(editProfileName(value))}></Send>}
+                      {value && <Send onClick={() => dispatchEditName(editProfileName(value), setOpen(false))}></Send>}
                   </InputAdornment>
               }>
               </Input>
@@ -61,29 +57,3 @@ export const ModalEdit = () => {
       </span>
     );
   }
-
-//   import React from "react";
-//   import styles from "./editButton.module.css"
-//   // import EditIcon from '@mui/icons-material/Edit';
-//   import Box from '@mui/material/Box';
-//   import Button from '@mui/material/Button';
-//   import Modal from '@mui/material/Modal';
-//   import { Input } from "@mui/material";
-
-
-
-// export const EditButton = () => {
-//     const [open, setOpen] = React.useState(false);
-//     const handleOpen = () => setOpen(true);
-//     const handleClose = () => setOpen(false);
-
-
-//     return <span>
-//         <Button className={styles.btn_show} onClick={handleOpen()}>Open Edit Form</Button>
-//         <Modal open={open} onClose={handleClose}>
-//             <Box>
-//             <Input placeholder="Enter a name"></Input>
-//             </Box>
-//             </Modal>    
-//     </span>
-// }
