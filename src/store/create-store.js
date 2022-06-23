@@ -8,9 +8,9 @@ import { logger, botMessage } from "./middlewares"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage"
 import { getPublicGistsApi, getGistsByNameApi } from "../api/gists"
-import { createConversationsApi, getConversationsApi } from "../api/converstions"
+import { createConversationsApi, getConversationsApi, removeConversationApi } from "../api/converstions"
 
-const api = { getPublicGistsApi, getGistsByNameApi, createConversationsApi, getConversationsApi }
+const api = { getPublicGistsApi, getGistsByNameApi, createConversationsApi, getConversationsApi, removeConversationApi }
 
 const persistConfig = {
     key: "root",

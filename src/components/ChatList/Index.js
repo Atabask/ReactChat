@@ -3,7 +3,7 @@ import styles from "./chatListStyle.module.css";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { ChatComponent } from "../ChatComponent/index"
 import { useSelector, useDispatch } from "react-redux";
-import { deleteConversation } from "../../store/conversations/actions";
+import { deleteConversation } from "../../store/conversations/thunk";
 import { ModalAddRoom } from "./modalAddRoom/index"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
@@ -28,8 +28,10 @@ export const ChatRooms = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    dispatch(getConversations())
-  },[dispatch])
+    if(!conversations.length){
+      dispatch(getConversations())
+    }
+  },[dispatch, conversations])
 
  
 
