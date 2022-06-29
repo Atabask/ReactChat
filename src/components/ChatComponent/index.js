@@ -37,20 +37,6 @@ export const ChatComponent = () => {
             }
         }, [roomId])
 
-    // useEffect(() => {
-    //     const lastMessage = messages[messages.length - 1]
-    //     let timerId = null
-
-    //     if (messages.length && lastMessage?.author === "Nickname") {
-    //         timerId = setTimeout(() => {
-    //             addMessage("Hello", "BOT")
-    //         }, 1500);
-    //     }
-
-    //     return () => {
-    //         clearInterval(timerId)
-    //     }
-    // }, [addMessage, messages, roomId])
 
     const handlePressInput = ({ code }) => {
         if (code === "Enter") {

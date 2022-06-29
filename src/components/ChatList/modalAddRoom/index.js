@@ -6,7 +6,7 @@ import { Input, InputAdornment } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import Send from '@mui/icons-material/Send';
-import { createConversation } from "../../../store/conversations/actions"
+import { createConversation } from "../../../store/conversations/thunk"
 
 const style = {
     position: 'absolute',

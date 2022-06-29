@@ -1,6 +1,6 @@
-import React from "react";
 import { ChatRooms } from "./ChatList/Index"
 import  styles from "./wrapper.module.css"
+
 
 
 
