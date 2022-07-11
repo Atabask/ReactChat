@@ -6,7 +6,7 @@ import { Input, InputAdornment } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import Send from '@mui/icons-material/Send';
-import { createConversation } from "../../../store/conversations/actions"
+import { createConversation } from "../../../store/conversations/thunk"
 
 const style = {
     position: 'absolute',
@@ -21,13 +21,23 @@ const style = {
 };
 
 export const ModalAddRoom = () => {
+
     const [open, setOpen] = React.useState(false);
+
     const handleOpen = () => setOpen(true);
+
     const handleClose = () => setOpen(false);
+
     const [nameNewRoom, setNameNewRoom] = React.useState("")
+
+    // console.log("nameNewRoom>>", nameNewRoom)
+    
     const conversations = useSelector(
-        (state) => state.conversations.conversations
+        
+        (state) => state.conversations.conversations,
+
       )
+
     const dispatchCreateRoom = useDispatch();
 
     
@@ -35,9 +45,9 @@ export const ModalAddRoom = () => {
 
 
     const createRoom = (nameNewRoom) => {
-        const isValidName = !conversations.includes(nameNewRoom)
-
-        if (!!isValidName) {
+        const isValidName = conversations.includes(nameNewRoom)
+        
+        if (!isValidName) {
             dispatchCreateRoom(createConversation(nameNewRoom));
         } else {
             alert("Fill in the field")

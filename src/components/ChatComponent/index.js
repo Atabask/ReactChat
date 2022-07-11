@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import styles from "./styleChatComponent.module.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sendMessage, deleteMessage } from "../../store/messages";
+import { deleteMessage, getMessages, createMessage, messagesSelector } from "../../store/messages";
 import { Button } from "@mui/material";
 
 
@@ -13,11 +13,14 @@ import { Button } from "@mui/material";
 
 export const ChatComponent = () => {
 
-    const { roomId } = useParams();
+    const { conversationID } = useParams();
 
     const [value, setValue] = useState("");
 
-    const messages = useSelector((state) => state.messages.messages[roomId] ?? [])
+    const selector = useMemo(() => messagesSelector(conversationID), [conversationID])
+
+    const messages = useSelector(selector)
+
 
     const dispatch = useDispatch()
 
@@ -30,27 +33,29 @@ export const ChatComponent = () => {
     }, [messages])
 
     const addMessage = useCallback(
-        (message, author = "Nickname") => {
+        (message, author = "User") => {
             if (message) {
-                dispatch(sendMessage(roomId, { message, author }))
+                console.log("message>>", message)
+                dispatch(createMessage({ author, message }, conversationID))
                 setValue("")
             }
-        }, [roomId])
+
+        }, [conversationID]);
+
 
     // useEffect(() => {
-    //     const lastMessage = messages[messages.length - 1]
-    //     let timerId = null
-
-    //     if (messages.length && lastMessage?.author === "Nickname") {
-    //         timerId = setTimeout(() => {
-    //             addMessage("Hello", "BOT")
-    //         }, 1500);
+    //     if (!Object.keys(messages).length) {
+    //         dispatch(getMessages());
     //     }
+    // }, [dispatch, messages]); Идет бесконечный GET запрос. Почему???
 
-    //     return () => {
-    //         clearInterval(timerId)
-    //     }
-    // }, [addMessage, messages, roomId])
+    const deleteMessageId = useCallback((message, conversationID) => {
+
+        dispatch(deleteMessage(conversationID, message));
+
+        
+
+    },[dispatch])
 
     const handlePressInput = ({ code }) => {
         if (code === "Enter") {
@@ -66,7 +71,10 @@ export const ChatComponent = () => {
                         <div className={styles.messageFull} key={message.id}>
                             <h2 className={styles.message_author}>{message.author}</h2>:
                             <p className={styles.message_text}>{message.message}</p>
-                            <Button onClick={() => dispatch(deleteMessage(roomId, message.id))}><DeleteIcon /></Button>
+                            <Button
+                                onClick={() => deleteMessageId(message, conversationID)}
+                            ><DeleteIcon />
+                            </Button>
                         </div>
                     )}
                 </div>

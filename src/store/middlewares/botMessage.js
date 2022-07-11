@@ -1,12 +1,12 @@
-import { SEND_MESSAGE, sendMessage } from "../messages"
+import { CREATE_MESSAGE_SUCCESS, createMessage } from "../messages"
 
 
 export const botMessage = (store) => (next) => (action) => {
 
-    if (action.type === SEND_MESSAGE && action.payload.message.author === "Nickname") {  
+    if (action.type === CREATE_MESSAGE_SUCCESS && action.payload.message.author === "User") {  
         setTimeout(()=>{
             store.dispatch(
-                sendMessage(action.payload.roomId, {
+                createMessage(action.payload.roomID, {
                     author: "BOT",
                     message: "Hi"
                 })
