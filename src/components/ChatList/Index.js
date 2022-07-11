@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect} from "react";
 import styles from "./chatListStyle.module.css";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import {  Routes, Route, useNavigate, Link } from "react-router-dom";
 import { ChatComponent } from "../ChatComponent/index"
 import { useSelector, useDispatch } from "react-redux";
 import { deleteConversation } from "../../store/conversations/thunk";
 import { ModalAddRoom } from "./modalAddRoom/index"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button } from "@mui/material";
+import { Button,  } from "@mui/material";
 import { getConversations } from "../../store/conversations/thunk";
 
 
@@ -16,30 +16,30 @@ import { getConversations } from "../../store/conversations/thunk";
 
 export const ChatRooms = () => {
 
-  const conversations = useSelector((state) => 
-    state.conversations.conversations
+  const conversations = useSelector((state) =>
+  
+    state.conversations.conversations 
   )
 
-  console.log(conversations)
-  
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!conversations.length){
-      dispatch(getConversations())
-    }
-  },[dispatch, conversations])
+    if (!conversations.length) {
 
- 
+      dispatch(getConversations())
+    
+    }
+  }, [dispatch, conversations])
+
+
 
   const deleteRoom = (conversation) => {
     dispatch(deleteConversation(conversation));
-    navigate("/chat")
+    navigate("/chat/")
   }
-
 
   return (
     <div className={styles.wrapper_Chat_List}>
@@ -47,10 +47,11 @@ export const ChatRooms = () => {
         <h1>Chat rooms</h1>
         <span><ModalAddRoom /></span>
       </div>
-      <nav>
+
+      <nav className={styles.wrapper_title_conversation}>
         {conversations.map((conversation) => (
-          <div key={conversation}>
-            <Link>{conversation}
+          <div className={styles.wrapper_title_conversation} key={conversation}>
+            <Link className={styles.title_conversation} to={conversation} >{conversation}
               <Button onClick={() => deleteRoom(conversation)}>
                 <DeleteIcon />
               </Button>
@@ -59,21 +60,11 @@ export const ChatRooms = () => {
         ))}
       </nav>
 
+
       <Routes>
-        <Route path=":roomId" element={<ChatComponent className={styles.chatRoom} />}></Route>
+        <Route path=":conversationID" element={<ChatComponent  className={styles.chatRoom} />}></Route>
       </Routes>
     </div>
   )
 }
 
-
-
-// {conversations.map((conversation) => (
-//   <div className={styles.wrapper_link_room} key={conversation}>
-//     <Link to={conversation}>{conversation}</Link>
-//     <Button onClick={() => deleteRoom(conversation)}>
-//       <DeleteIcon />
-//     </Button>
-//     <br />
-//   </div>
-// ))}

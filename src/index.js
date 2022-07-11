@@ -10,7 +10,6 @@ import { HeaderComponent } from './components/HeaderChat';
 import { store, persistor } from './store';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './api/firebase';
-import { getConversationsApi } from "./api/converstions"
 
 import "./main.css"
 

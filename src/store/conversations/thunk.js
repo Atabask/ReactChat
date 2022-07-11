@@ -10,6 +10,7 @@ import {
     removeErrorConversation
 } from "./actions"
 
+
 export const getConversations = () => async (dispatch, _, api) => {
 
     const conversations = [];
@@ -19,11 +20,15 @@ export const getConversations = () => async (dispatch, _, api) => {
 
         const snapshot = await api.getConversationsApi()
 
+
         snapshot.forEach((snap) => {
-            conversations.push(snap.val())
+            conversations.push(snap.val());
         });
 
+
+    
         dispatch(getSuccessConversations(conversations))
+        
     } catch (e) {
         dispatch(getErrorConversations(e))
     }
@@ -31,10 +36,13 @@ export const getConversations = () => async (dispatch, _, api) => {
 
 export const createConversation = (conversation) => async (dispatch, _, api) => {
 
+
     try {
         dispatch(createStartConversation())
 
-         await api.createConversationsApi(conversation)
+        const snapshot = await api.createConversationsApi(conversation)
+
+        console.log("snapshot>>", snapshot)
 
         dispatch(createSuccessConversation(conversation))
     } catch (e) {
@@ -47,7 +55,7 @@ export const deleteConversation = (conversation) => async (dispatch, _, api) => 
     try {
         dispatch(removeStartConversation())
 
-         await api.removeConversationApi(conversation)
+        await api.removeConversationApi(conversation)
 
         dispatch(removeSuccessConversation(conversation))
     } catch (e) {

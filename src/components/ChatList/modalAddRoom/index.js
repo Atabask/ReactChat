@@ -21,13 +21,23 @@ const style = {
 };
 
 export const ModalAddRoom = () => {
+
     const [open, setOpen] = React.useState(false);
+
     const handleOpen = () => setOpen(true);
+
     const handleClose = () => setOpen(false);
+
     const [nameNewRoom, setNameNewRoom] = React.useState("")
+
+    // console.log("nameNewRoom>>", nameNewRoom)
+    
     const conversations = useSelector(
-        (state) => state.conversations.conversations
+        
+        (state) => state.conversations.conversations,
+
       )
+
     const dispatchCreateRoom = useDispatch();
 
     
@@ -35,9 +45,9 @@ export const ModalAddRoom = () => {
 
 
     const createRoom = (nameNewRoom) => {
-        const isValidName = !conversations.includes(nameNewRoom)
-
-        if (!!isValidName) {
+        const isValidName = conversations.includes(nameNewRoom)
+        
+        if (!isValidName) {
             dispatchCreateRoom(createConversation(nameNewRoom));
         } else {
             alert("Fill in the field")

@@ -32,7 +32,6 @@ export const GistsComponent = () => {
     return <div className={styles.wrapper_gists}>
         <h1 className={styles.header_gist}>Gists</h1>
         <div className={styles.wrapper_gists_flex}>
-            -
             <div className={styles.wrapper_public_gists}>
             <h1 className={styles.header_public_gists}>Public Gists</h1>
                 {gists.map((gist, index) => (
@@ -40,13 +39,15 @@ export const GistsComponent = () => {
                         <h2>{gist.description}</h2>
                     </div>
                 ))}
-
+                <div className={styles.wrapper_pagi}>
                 {Array.from({ length: 10 })
                     .map((_, index) => index + 1)
                     .map((item) =>
-                        <Button onClick={() => dispatch(getGists(item))} key={item}>
+                    
+                        <Button className={styles.btn_pagi} onClick={() => dispatch(getGists(item))} key={item}>
                             {item}
                         </Button>)}
+                    </div>
             </div>
             <GistsByName />
         </div>

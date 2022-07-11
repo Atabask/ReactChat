@@ -1,46 +1,97 @@
-import { AccessTimeOutlined } from "@mui/icons-material";
 import { nanoid } from "nanoid";
-import { SEND_MESSAGE, DELETE_MESSAGE } from "./types"
+import {
+    // SEND_MESSAGE,
+    // DELETE_MESSAGE,
+    GET_MESSAGES_START,
+    GET_MESSAGES_SUCCESS,
+    GET_MESSAGES_ERROR,
+    CREATE_MESSAGE_START,
+    CREATE_MESSAGE_SUCCESS,
+    CREATE_MESSAGE_ERROR,
+    DELETE_MESSAGE_START,
+    DELETE_MESSAGE_SUCCESS,
+    DELETE_MESSAGE_ERROR
+} from "./types"
 
 
 const initialState = {
-    messages: {
-        Auto: [
-            {
-                author: "BOT",
-                message: "Fill in the fields",
-            },
-            {
-                author: "Chack",
-                message: "Hi",
-            }
-        ]
-    }
+    messages: {},
+    pending: false,
+    error: null,
 }
 
 
 export const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        // case SEND_MESSAGE:
+        //     return {
+        //         ...state,
+        //         messages: {
+        //             ...state.messages,
+        //             [action.payload.roomID]: [
+        //                 ...(state.messages[action.payload.roomID] ?? []),
+        //                 { ...action.payload.message, id: nanoid() }
+        //             ]
+        //         }
+        //     };
+        // case DELETE_MESSAGE:
+        //     return {
+        //         ...state,
+        //         messages: {
+        //             ...state.messages,
+        //             [action.payload.roomID]:
+        //                 state.messages[action.payload.roomID].filter(message => message.id !== action.payload.messageId)
+        //         }
+        //     };
+
+
+        case GET_MESSAGES_START:
+            return { ...state, pending: true, error: null };
+        case GET_MESSAGES_SUCCESS:
+            return {
+                ...state,
+                pending: false,
+                messages: action.payload
+            };
+        case GET_MESSAGES_ERROR:
+            return { ...state, pending: false, error: action.payload };
+
+
+        case CREATE_MESSAGE_START:
+            return { ...state, pending: true, error: null };
+        case CREATE_MESSAGE_SUCCESS:
             return {
                 ...state,
                 messages: {
                     ...state.messages,
-                    [action.payload.roomId]: [
-                        ...(state.messages[action.payload.roomId] ?? []),
+                    [action.payload.roomID]: [
+                        ...(state.messages[action.payload.roomID] ?? []),
                         { ...action.payload.message, id: nanoid() }
                     ]
                 }
-            }
-        case DELETE_MESSAGE:
+            };
+        case CREATE_MESSAGE_ERROR:
+            return { ...state, pending: false, error: action.payload };
+
+        case DELETE_MESSAGE_START:
+            return {
+                ...state, pending: true, error: null,
+            };
+        case DELETE_MESSAGE_SUCCESS:
             return {
                 ...state,
                 messages: {
                     ...state.messages,
-                    [action.payload.roomId]: state.messages[action.payload.roomId].filter(message => message.id !== action.payload.messageId)
+                    [action.payload.roomID]:
+                        state.messages[action.payload.roomID].filter(
+                            message => message.id !== action.payload.messageId
+                        )
                 }
+            };
+        case DELETE_MESSAGE_ERROR:
+            return {
+                ...state, pending: false, error: action.payload,
             }
-
         default:
             return state;
     }

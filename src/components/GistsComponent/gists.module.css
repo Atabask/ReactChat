@@ -26,3 +26,15 @@
     font-size: 50px;
 }
 
+.wrapper_pagi {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn_pagi {
+    padding: 15px;
+    font-size: 20px;
+}
+

@@ -12,6 +12,7 @@ import {
 
 
 const initialState = {
+    
     conversations: [],
     pending: false,
     error: null,
@@ -36,15 +37,20 @@ export const conversationsReducer = (state = initialState, action) => {
             return { ...state, pending: false, error: action.payload };
 
 
+
+
         case CREATE_CONVERSATION_START:
             return { ...state, pendingCreate: true, errorCreate: null };
         case CREATE_CONVERSATION_SUCCESS:
             return {
                 ...state,
+                pendingCreate: false,
                 conversations: [...state.conversations, action.payload]
             };
         case CREATE_CONVERSATION_ERROR:
             return { ...state, pendingCreate: false, errorCreate: action.payload };
+
+
 
 
         case REMOVE_CONVERSATION_START:

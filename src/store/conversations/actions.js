@@ -1,5 +1,4 @@
 import {
-    DELETE_CONVERSATION,
     GET_CONVERSATIONS_ERROR,
     GET_CONVERSATIONS_START,
     GET_CONVERSATIONS_SUCCESS,
@@ -12,19 +11,23 @@ import {
 } from "./types"
 
 
+
 export const getStartConversations = () => ({
     type: GET_CONVERSATIONS_START,
 })
 
 export const getSuccessConversations = (conversations) => ({
     type: GET_CONVERSATIONS_SUCCESS,
-    payload: conversations,
+    payload: conversations
 })
 
 export const getErrorConversations = (error) => ({
     type: GET_CONVERSATIONS_ERROR,
     payload: error,
 })
+
+
+
 
 export const createStartConversation = () => ({
     type: CREATE_CONVERSATION_START,
@@ -39,6 +42,9 @@ export const createErrorConversation = (error) => ({
     type: CREATE_CONVERSATION_ERROR,
     payload: error,
 })
+
+
+
 
 export const removeStartConversation = () => ({
     type: REMOVE_CONVERSATION_START,
