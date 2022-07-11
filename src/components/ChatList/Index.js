@@ -11,9 +11,6 @@ import { getConversations } from "../../store/conversations/thunk";
 
 
 
-
-
-
 export const ChatRooms = () => {
 
   const conversations = useSelector((state) =>
@@ -37,7 +34,9 @@ export const ChatRooms = () => {
 
 
   const deleteRoom = (conversation) => {
+
     dispatch(deleteConversation(conversation));
+
     navigate("/chat/")
   }
 

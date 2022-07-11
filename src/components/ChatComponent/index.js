@@ -5,7 +5,7 @@ import { Input, InputAdornment } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sendMessage, deleteMessage, getMessages, createMessage, messagesSelector } from "../../store/messages";
+import { deleteMessage, getMessages, createMessage, messagesSelector } from "../../store/messages";
 import { Button } from "@mui/material";
 
 
@@ -49,11 +49,11 @@ export const ChatComponent = () => {
     //     }
     // }, [dispatch, messages]); Идет бесконечный GET запрос. Почему???
 
-    const deleteMessageId = useCallback((message) => {
+    const deleteMessageId = useCallback((message, conversationID) => {
 
-        const messageID = message.id
+        dispatch(deleteMessage(conversationID, message));
 
-        dispatch(deleteMessage(messageID));
+        
 
     },[dispatch])
 
@@ -72,7 +72,7 @@ export const ChatComponent = () => {
                             <h2 className={styles.message_author}>{message.author}</h2>:
                             <p className={styles.message_text}>{message.message}</p>
                             <Button
-                                onClick={() => deleteMessageId(message)}
+                                onClick={() => deleteMessageId(message, conversationID)}
                             ><DeleteIcon />
                             </Button>
                         </div>
@@ -97,6 +97,3 @@ export const ChatComponent = () => {
         </div>
     )
 }
-
-
-// onClick={() => dispatch(deleteMessage(conversationID, message.id))}

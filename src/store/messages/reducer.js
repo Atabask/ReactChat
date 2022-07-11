@@ -22,29 +22,10 @@ const initialState = {
 
 
 export const messagesReducer = (state = initialState, action) => {
+
+    console.log("action>>>>>>>>>>>>", action)
     switch (action.type) {
-        // case SEND_MESSAGE:
-        //     return {
-        //         ...state,
-        //         messages: {
-        //             ...state.messages,
-        //             [action.payload.roomID]: [
-        //                 ...(state.messages[action.payload.roomID] ?? []),
-        //                 { ...action.payload.message, id: nanoid() }
-        //             ]
-        //         }
-        //     };
-        // case DELETE_MESSAGE:
-        //     return {
-        //         ...state,
-        //         messages: {
-        //             ...state.messages,
-        //             [action.payload.roomID]:
-        //                 state.messages[action.payload.roomID].filter(message => message.id !== action.payload.messageId)
-        //         }
-        //     };
-
-
+     
         case GET_MESSAGES_START:
             return { ...state, pending: true, error: null };
         case GET_MESSAGES_SUCCESS:
@@ -72,6 +53,8 @@ export const messagesReducer = (state = initialState, action) => {
             };
         case CREATE_MESSAGE_ERROR:
             return { ...state, pending: false, error: action.payload };
+
+
 
         case DELETE_MESSAGE_START:
             return {

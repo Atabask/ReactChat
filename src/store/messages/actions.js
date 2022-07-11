@@ -12,14 +12,6 @@ import {
 } from "./types";
 
 
-// export const deleteMessage = ( messageId, roomID ) => ({
-//   type: DELETE_MESSAGE,
-//   payload: { roomID, messageId },
-// });
-
-
-
-
 export const getMessagesStart = () => ({
   type: GET_MESSAGES_START,
 });

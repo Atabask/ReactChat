@@ -52,32 +52,21 @@ export const createMessage = (message, roomID) => async (dispatch, _, api) => {
 
 
 
-export const deleteMessage = (messageId) => async (dispatch, _, api) => {
+export const deleteMessage = (roomID, message) => async (dispatch, _, api) => {
+
+    const messageID = message.id
 
     try {
+
         dispatch(deleteMessageStart())
 
-         await api.deleteMessageApi(messageId)
+         await api.deleteMessageApi()
 
-        dispatch(deleteMessageSuccess(messageId))
+        dispatch(deleteMessageSuccess(roomID, messageID))
+
     } catch (e) {
+
         dispatch(deleteMessageError(e))
     }
 }
 
-
-
-// export const sendMessageWithBot = (roomID, message) => (dispatch) => {
-//     dispatch(sendMessage(roomID, message));
-
-//     if (message.author === "User") {
-//         setTimeout(() => {
-//             dispatch(
-//                 sendMessage(roomID, {
-//                     author: "Bot",
-//                     message: "hello from bot thunk",
-//                 })
-//             );
-//         }, 500);
-//     }
-// };
